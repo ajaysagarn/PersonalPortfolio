@@ -2,9 +2,6 @@ import express from 'express'
 import bodyParser from 'body-parser'
 import path from 'path'
 
-// const express = require('express');
-// const bodyParser = require('body-parser')
-// const path = require('path');
 
 const app = express();
 const rootHtml = path.join(__dirname,'../public', 'index.html')

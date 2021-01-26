@@ -66,6 +66,10 @@ module.exports = {
             loader: "raw-loader"
           }
         ]
+      },
+      {
+        test: /\.css$/i,
+        use: ["style-loader", "css-loader"],
       }
     ]
   },
@@ -77,5 +81,8 @@ module.exports = {
       /\.ttf$/,
       /\.otf$/
     ), // Exclude moment locales in bundles (load explicitly in js file),
+    new HtmlWebpackPlugin({
+        filename: "index.html"
+    })
   ]
 };

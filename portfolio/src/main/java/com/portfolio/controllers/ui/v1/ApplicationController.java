@@ -8,8 +8,8 @@ import springfox.documentation.annotations.ApiIgnore;
 @RestController
 @ApiIgnore
 public class ApplicationController {
-	@GetMapping("/")
+	@GetMapping("/**")
     String home() {
-        return "Hello World!";
+        return "test.html";
     }
 }

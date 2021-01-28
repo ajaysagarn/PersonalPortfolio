@@ -1,3 +1,4 @@
 node_modules/
 /portfolio/server/bundle.server.js
 /package.json
+portfolio/src/main/resources/static/**

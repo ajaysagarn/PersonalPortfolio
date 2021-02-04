@@ -49,7 +49,7 @@ module.exports = {
         ]
       },
       {
-        test: /\.(woff|woff2|eot|ttf|otf)(\?cl=0)?$/,
+        test: /\.(woff|woff2|eot|ttf|otf|ico|md)(\?cl=0)?$/,
         loader: "file-loader"
       },
       {
@@ -84,8 +84,7 @@ module.exports = {
       /\.otf$/
     ), // Exclude moment locales in bundles (load explicitly in js file),
     new HtmlWebpackPlugin({
-        filename: "index.html"
-    }),
-    new CleanWebpackPlugin()
+        filename: "home.html"
+    })
   ]
 };

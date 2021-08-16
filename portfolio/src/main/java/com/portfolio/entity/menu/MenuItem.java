@@ -1,33 +1,21 @@
 package com.portfolio.entity.menu;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
 import java.util.List;
 
-import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.Document;
 
-@Document(collection="menu")
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
 public class MenuItem {
 		
 	private String title;
 	private String content;
 	private List<String> url;
 
-	public String getTitle() {
-		return title;
-	}
-	public void setTitle(String title) {
-		this.title = title;
-	}
-	public String getContent() {
-		return content;
-	}
-	public void setContent(String content) {
-		this.content = content;
-	}
-	public List<String> getUrl() {
-		return url;
-	}
-	public void setUrl(List<String> url) {
-		this.url = url;
-	}
 }

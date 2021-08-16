@@ -1,7 +1,13 @@
 package com.portfolio.controller.api.v1;
 
 import java.util.List;
+
+import com.ajsa.dyrepo.util.RepositoryException;
+import com.portfolio.service.MenuService;
+import com.portfolio.util.PortfolioException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -12,43 +18,52 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.portfolio.entity.menu.Menu;
-import com.portfolio.repository.MenuRepository;
+import com.portfolio.dao.MenuDao;
 
 @RestController
 @RequestMapping("/api/v1")
 public class MenuController {
-	
-	private final MenuRepository menuRepository;
+
+	private MenuService menuService;
 
 	@Autowired
-	public MenuController(MenuRepository menuRepository) {
-		this.menuRepository = menuRepository;
+	public MenuController(MenuService menuService) {
+		this.menuService = menuService;
 	}
 	
-	@GetMapping("/getMenus")
-	public List<Menu> getAllMenus() {
-		return menuRepository.findAll();
+	@GetMapping("{repoId}/getMenus")
+	public ResponseEntity getAllMenus(@PathVariable String repoId) {
+		try {
+			List<Menu> menus = menuService.findAll(repoId);
+			return ResponseEntity.ok().body(menus);
+		} catch (RepositoryException e) {
+			return ResponseEntity.status(e.getStatus()).body(e.getErrorMessage());
+		} catch (PortfolioException e) {
+			return ResponseEntity.status(e.getStatus()).body(e.getErrorMessage());
+		} catch (Exception e){
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(HttpStatus.INTERNAL_SERVER_ERROR.getReasonPhrase());
+		}
 	}
 	
-	@GetMapping("/getMenu/{id}")
-	public Menu getMenuById(@PathVariable String id) {
-		return menuRepository.findById(id).orElse(null);
+	@GetMapping("{repoId}/getMenu/{id}")
+	public Menu getMenuById(@PathVariable String repoId, @PathVariable String id) {
+		return menuService.findById(repoId, id).orElse(null);
 	}
 	
-	@PostMapping("/createMenu")
-	public Menu createMenu(@RequestBody Menu menu) {
-		return menuRepository.save(menu);
+	@PostMapping("{repoId}/createMenu")
+	public Menu createMenu(@PathVariable String repoId, @RequestBody Menu menu) {
+		return menuService.save(repoId, menu);
 	}
 	
-	@DeleteMapping("/deleteMenu/{id}")
-	public void deleteMenu(@PathVariable("id") String menuId) {
-		menuRepository.deleteById(menuId);
+	@DeleteMapping("{repoId}/deleteMenu/{id}")
+	public void deleteMenu(@PathVariable String repoId ,@PathVariable("id") String menuId) {
+		menuService.deleteById(repoId, menuId);
 	}
 	
-	@PutMapping("/addMenuItem/{id}")
-	public Menu updateMenu(@PathVariable("id") String menuId,@RequestBody Menu menu) {
+	@PutMapping("{repoId}/addMenuItem/{id}")
+	public Menu updateMenu(@PathVariable String repoId,@PathVariable("id") String menuId,@RequestBody Menu menu) {
 		menu.setId(menuId);
-		return menuRepository.save(menu);
+		return menuService.save(repoId,menu);
 	}
 	
 }

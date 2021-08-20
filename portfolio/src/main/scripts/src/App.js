@@ -1,10 +1,10 @@
 import React from 'react';
-import MainLayout from './widgets/appshell/MainLayout'
+import MyRouter from './app/Router';
 function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <MainLayout/>
+        <MyRouter/>
       </header>
     </div>
   );

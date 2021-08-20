@@ -1,12 +1,10 @@
 import React from 'react';
-import Blog from "./widgets/Blog";
-import './App.css';
-
+import MainLayout from './widgets/appshell/MainLayout'
 function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <Blog/>
+        <MainLayout/>
       </header>
     </div>
   );

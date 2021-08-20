@@ -15,10 +15,10 @@ module.exports = {
   resolve: {
     modules: [
       "../node_modules",
-      //path.resolve("./scripts"),
+      path.resolve("./src"),
       path.resolve(".")
     ],
-    extensions: [".wasm", ".mjs", ".js", ".json", ".jsx", ".tsx", ".ts"]
+    extensions: [".wasm", ".mjs", ".js", ".json", ".jsx", ".tsx", ".ts",".css"]
   },
   module: {
     rules: [

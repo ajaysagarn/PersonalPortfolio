@@ -23,7 +23,7 @@
     "file-loader": "^2.0.0",
     "handlebars": "^4.0.12",
     "handlebars-loader": "^1.7.0",
-    "loader-utils": "^1.1.0",
+    "loader-utils": "^1.4.1",
     "markdown-to-jsx": "^7.1.1",
     "optimize-css-assets-webpack-plugin": "^4.0.3",
     "raw-loader": "^0.5.1",
